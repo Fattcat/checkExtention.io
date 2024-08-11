@@ -39,8 +39,8 @@
         checkExtension().then(isInstalled => {
             const messageElement = document.getElementById('message');
             if (isInstalled) {
-                document.body.style.backgroundColor = "white";
-                messageElement.style.color = "black";
+                document.body.style.backgroundColor = "orange";
+                messageElement.style.color = "yellow";
                 messageElement.innerHTML = "<h1>Extension Pack Successfully Working</h1>";
             } else {
                 document.body.style.backgroundColor = "black";
