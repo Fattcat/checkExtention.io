@@ -1,34 +1,31 @@
 <!DOCTYPE html>
-<html lang="sk">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Donkova WebStránka</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Chrome Extension</title>
 </head>
 <body>
-  <center><h1>LACNÝ NADPIS</h1></center>
-  <script>
-    function checkExtension() {
-  return new Promise((resolve, reject) => {
-    chrome.runtime.sendMessage('your-extension-id', { action: 'check_extension' }, (response) => {
-      if (response && response.status === 'installed') {
-        resolve(true);
-      } else {
-        resolve(false);
-      }
-    });
-  });
-}
+    <script>
+        function checkExtension() {
+            return new Promise((resolve, reject) => {
+                chrome.runtime.sendMessage('your-extension-id', { action: 'check_extension' }, (response) => {
+                    if (response && response.status === 'installed') {
+                        resolve(true);
+                    } else {
+                        resolve(false);
+                    }
+                });
+            });
+        }
 
-checkExtension().then(isInstalled => {
-  if (isInstalled) {
-    // Pokračovať v načítaní stránky
-  } else {
-    // Zobraziť chybové hlásenie
-    document.body.innerHTML = "<h1>Extension not installed. Access denied.</h1>";
-  }
-});
-
-  </script>
+        checkExtension().then(isInstalled => {
+            if (isInstalled) {
+                document.body.innerHTML = "<h1>Extension is installed!</h1>";
+            } else {
+                document.body.innerHTML = "<h1>Extension is not installed. Access denied.</h1>";
+            }
+        });
+    </script>
 </body>
 </html>
