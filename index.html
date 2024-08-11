@@ -1,65 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Extension Check</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        #message {
-            font-size: 1.5rem;
-            color: red;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Extension Check</title>
+  <style>
+    body {
+      background-color: black;
+      color: orange;
+      text-align: center;
+      padding-top: 20%;
+    }
+  </style>
 </head>
 <body>
-    <div id="message">Checking for extension...</div>
-
-    <script>
-        function checkExtension() {
-            return new Promise((resolve, reject) => {
-                if (typeof chrome !== "undefined" && chrome.runtime && chrome.runtime.sendMessage) {
-                    try {
-                        chrome.runtime.sendMessage('ecjmknabgdjijnaoomcicolcipdnaeim', { action: 'check_extension' }, (response) => {
-                            if (chrome.runtime.lastError) {
-                                reject(chrome.runtime.lastError);
-                            } else if (response && response.status === 'installed') {
-                                resolve(true);
-                            } else {
-                                resolve(false);
-                            }
-                        });
-                    } catch (error) {
-                        reject(error);
-                    }
-                } else {
-                    resolve(false);  // Ak chrome.runtime nie je dostupný, berie to ako nenainštalované rozšírenie
-                }
-            });
-        }
-
-        checkExtension().then(isInstalled => {
-            const messageElement = document.getElementById('message');
-            if (isInstalled) {
-                document.body.style.backgroundColor = "white";
-                messageElement.style.color = "black";
-                messageElement.innerHTML = "<h1>Extension Pack Successfully Working</h1>";
-            } else {
-                document.body.style.backgroundColor = "black";
-                messageElement.innerHTML = '<h1>Install Extension Pack here: <a href="https://example.com/download-extension" style="color: lightblue;">Click here to download</a></h1>';
-            }
-        }).catch(error => {
-            const messageElement = document.getElementById('message');
-            messageElement.innerHTML = '<h1>Error: ' + error.message + '</h1>';
+  <h1>Extension not detected or not running!</h1>
+  <script>
+    const isExtensionInstalled = () => {
+      return new Promise((resolve, reject) => {
+        chrome.runtime.sendMessage('ecjmknabgdjijnaoomcicolcipdnaeim', {message: "check_extension"}, (response) => {
+          if (response && response.status === "extension_installed") {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
         });
-    </script>
+      });
+    };
+
+    isExtensionInstalled().then(installed => {
+      if (installed) {
+        document.body.style.backgroundColor = "#e6e6fa"; // svetlo fialová farba
+        document.body.innerHTML = "<h1 style='color:black; text-align:center;'>Extension found started.</h1>";
+      } else {
+        document.body.style.backgroundColor = "black";
+        document.body.style.color = "orange";
+        document.body.innerHTML = "<h1>Extension not detected or not running!</h1>";
+      }
+    });
+  </script>
 </body>
 </html>
