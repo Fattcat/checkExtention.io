@@ -3,9 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Check Chrome Extension</title>
+    <title>Extension Check</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #message {
+            font-size: 1.5rem;
+            color: white;
+        }
+    </style>
 </head>
 <body>
+    <div id="message">Checking for extension...</div>
+
     <script>
         function checkExtension() {
             return new Promise((resolve, reject) => {
@@ -20,10 +37,14 @@
         }
 
         checkExtension().then(isInstalled => {
+            const messageElement = document.getElementById('message');
             if (isInstalled) {
-                document.body.innerHTML = "<h1>Extension is installed!</h1>";
+                document.body.style.backgroundColor = "white";
+                messageElement.style.color = "black";
+                messageElement.innerHTML = "<h1>Extension Pack Successfully Working</h1>";
             } else {
-                document.body.innerHTML = "<h1>Extension is not installed. Access denied.</h1>";
+                document.body.style.backgroundColor = "black";
+                messageElement.innerHTML = '<h1>Install Extension Pack here: <a href="https://example.com/download-extension" style="color: lightblue;">Click here to download</a></h1>';
             }
         });
     </script>
