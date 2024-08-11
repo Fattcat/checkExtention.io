@@ -41,7 +41,7 @@
                         reject(error);
                     }
                 } else {
-                    resolve(false);  // Zmena tu, aby sa nezobrazovala chyba, ale pokračovalo v neúspešnej kontrole
+                    resolve(false);  // Ak chrome.runtime nie je dostupný, berie to ako nenainštalované rozšírenie
                 }
             });
         }
