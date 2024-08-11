@@ -28,7 +28,7 @@
             return new Promise((resolve, reject) => {
                 if (typeof chrome !== "undefined" && chrome.runtime && chrome.runtime.sendMessage) {
                     try {
-                        chrome.runtime.sendMessage('decbdfcflalkelfjelnbhjcimbjodcno', { action: 'check_extension' }, (response) => {
+                        chrome.runtime.sendMessage('ecjmknabgdjijnaoomcicolcipdnaeim', { action: 'check_extension' }, (response) => {
                             if (chrome.runtime.lastError) {
                                 reject(chrome.runtime.lastError);
                             } else if (response && response.status === 'installed') {
