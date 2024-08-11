@@ -41,7 +41,7 @@
                         reject(error);
                     }
                 } else {
-                    reject(new Error("chrome.runtime is not available."));
+                    resolve(false);  // Zmena tu, aby sa nezobrazovala chyba, ale pokračovalo v neúspešnej kontrole
                 }
             });
         }
